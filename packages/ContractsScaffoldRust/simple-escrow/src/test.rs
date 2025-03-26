@@ -3,7 +3,7 @@ extern crate std;
 
 use super::*;
 use soroban_sdk::testutils::{Address as _, Events};
-use soroban_sdk::{symbol_short, token, vec, Address, Env, IntoVal};
+use soroban_sdk::{symbol_short, token, Address, Env, IntoVal};
 use token::Client as TokenClient;
 use token::StellarAssetClient as TokenAdminClient;
 
@@ -90,13 +90,12 @@ fn test_deposit() {
     let env: Env = Env::default();
     let admin = Address::generate(&env);
     let (token_client, token_admin_client) = create_token_contract(&env, &admin);
-    let (contract, seller, escrow, buyer, amount) =
+    let (contract, _seller, _escrow, buyer, amount) =
         create_simple_escrow_contract(&env, token_client.address.clone());
     env.mock_all_auths();
     token_admin_client.mint(&buyer, &100);
     contract.deposit(&buyer, &token_client.address, &amount);
-    let event_vec = env.events().all();
-    let las_event = event_vec.last().unwrap();
+    let las_event = env.events().all().last().unwrap();
     let expected_event = (
         contract.address.clone(),
         (symbol_short!("DEPOSITED"), symbol_short!("amount")).into_val(&env),
@@ -115,4 +114,69 @@ fn test_deposit() {
             amount
         )
     });
+}
+
+#[test]
+fn test_confirm_delivery() {
+    let env: Env = Env::default();
+    let admin = Address::generate(&env);
+    let (token_client, token_admin_client) = create_token_contract(&env, &admin);
+    let (contract, _seller, _escrow, buyer, amount) =
+        create_simple_escrow_contract(&env, token_client.address.clone());
+    env.mock_all_auths();
+    token_admin_client.mint(&buyer, &100);
+    contract.deposit(&buyer, &token_client.address, &amount);
+    contract.confirm_delivery(&buyer);
+    let las_event = env.events().all().last().unwrap();
+    let expected_event = (
+        contract.address.clone(),
+        (symbol_short!("RELEASED"), symbol_short!("amount")).into_val(&env),
+    );
+    assert_eq!(las_event.0, expected_event.0);
+    assert_eq!(las_event.1, expected_event.1);
+    env.as_contract(&contract.address, || {
+        assert_eq!(
+            env.storage().instance().get(&DataKey::Status),
+            Some(Status::Complete)
+        );
+    });
+}
+
+#[test]
+fn test_refund() {
+    let env: Env = Env::default();
+    let admin = Address::generate(&env);
+    let (token_client, token_admin_client) = create_token_contract(&env, &admin);
+    let (contract, _seller, _escrow, buyer, amount) =
+        create_simple_escrow_contract(&env, token_client.address.clone());
+    env.mock_all_auths();
+    token_admin_client.mint(&buyer, &100);
+    contract.deposit(&buyer, &token_client.address, &amount);
+    contract.refund(&true, &amount);
+    let las_event = env.events().all().last().unwrap();
+    let expected_event = (
+        contract.address.clone(),
+        (symbol_short!("REFUNDED"), symbol_short!("b_amount")).into_val(&env),
+    );
+    assert_eq!(las_event.0, expected_event.0);
+    assert_eq!(las_event.1, expected_event.1);
+    env.as_contract(&contract.address, || {
+        assert_eq!(
+            env.storage().instance().get(&DataKey::Status),
+            Some(Status::Refunded)
+        );
+    });
+}
+
+#[test]
+fn test_get_status() {
+    let env: Env = Env::default();
+    let admin = Address::generate(&env);
+    let (token_client, token_admin_client) = create_token_contract(&env, &admin);
+    let (contract, _seller, _escrow, buyer, amount) =
+        create_simple_escrow_contract(&env, token_client.address.clone());
+    env.mock_all_auths();
+    token_admin_client.mint(&buyer, &100);
+    contract.deposit(&buyer, &token_client.address, &amount);
+    assert_eq!(contract.get_status(), Status::AwaitingDelivery);
 }
