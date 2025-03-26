@@ -7,6 +7,7 @@ use soroban_sdk::{symbol_short, token, Address, Env, IntoVal};
 use token::Client as TokenClient;
 use token::StellarAssetClient as TokenAdminClient;
 
+/// Creates a token contract for testing purposes.
 fn create_token_contract<'a>(e: &Env, admin: &Address) -> (TokenClient<'a>, TokenAdminClient<'a>) {
     let sac = e.register_stellar_asset_contract_v2(admin.clone());
     (
@@ -15,6 +16,7 @@ fn create_token_contract<'a>(e: &Env, admin: &Address) -> (TokenClient<'a>, Toke
     )
 }
 
+/// Creates a simple escrow contract for testing purposes.
 fn create_simple_escrow_contract(
     e: &Env,
     token: Address,
@@ -42,6 +44,7 @@ fn create_simple_escrow_contract(
     )
 }
 
+/// Tests the constructor of the escrow contract.
 #[test]
 fn test_constructor() {
     let env = Env::default();
@@ -85,6 +88,7 @@ fn test_constructor() {
     });
 }
 
+/// Tests the deposit functionality of the escrow contract.
 #[test]
 fn test_deposit() {
     let env: Env = Env::default();
@@ -116,6 +120,7 @@ fn test_deposit() {
     });
 }
 
+/// Tests the delivery confirmation functionality of the escrow contract.
 #[test]
 fn test_confirm_delivery() {
     let env: Env = Env::default();
@@ -142,6 +147,7 @@ fn test_confirm_delivery() {
     });
 }
 
+/// Tests the refund functionality of the escrow contract.
 #[test]
 fn test_refund() {
     let env: Env = Env::default();
@@ -168,6 +174,7 @@ fn test_refund() {
     });
 }
 
+/// Tests the retrieval of the contract's status.
 #[test]
 fn test_get_status() {
     let env: Env = Env::default();

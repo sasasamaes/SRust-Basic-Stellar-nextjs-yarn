@@ -13,6 +13,7 @@ pub struct SimpleEscrowContract;
 
 #[contractimpl]
 impl SimpleEscrowContract {
+    /// Initializes the contract with the buyer, seller, escrow agent, token, and amount.
     pub fn __constructor(
         env: &Env,
         buyer: Address,
@@ -31,6 +32,7 @@ impl SimpleEscrowContract {
             .set(&DataKey::Status, &Status::AwaitingPayment);
     }
 
+    /// Allows the buyer to deposit the specified amount of tokens into the escrow.
     pub fn deposit(env: &Env, buyer: Address, token: Address, amount: i128) {
         if !is_awaiting_payment(env) {
             panic!("Contract is not in the AwaitingPayment state");
@@ -52,6 +54,7 @@ impl SimpleEscrowContract {
             .publish((DEPOSITED, symbol_short!("amount")), amount);
     }
 
+    /// Confirms the delivery of goods and releases the funds to the seller.
     pub fn confirm_delivery(env: &Env, buyer: Address) {
         if !is_awaiting_delivery(env) {
             panic!("Contract is not in the AwaitingDelivery state");
@@ -74,6 +77,7 @@ impl SimpleEscrowContract {
             .publish((RELEASED, symbol_short!("amount")), storage_amount);
     }
 
+    /// Refunds the specified amount to the buyer or seller based on the `refund_buyer` flag.
     pub fn refund(env: &Env, refund_buyer: bool, amount: i128) {
         if !is_awaiting_delivery(env) {
             panic!("Contract is not in the AwaitingDelivery state");
@@ -129,6 +133,7 @@ impl SimpleEscrowContract {
             .set(&DataKey::Status, &Status::Refunded);
     }
 
+    /// Retrieves the current status of the contract.
     pub fn get_status(env: &Env) -> Status {
         env.storage().instance().get(&DataKey::Status).unwrap()
     }

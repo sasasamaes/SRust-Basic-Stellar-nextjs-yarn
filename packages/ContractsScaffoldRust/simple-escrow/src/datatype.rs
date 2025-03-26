@@ -2,6 +2,7 @@ use soroban_sdk::contracttype;
 
 #[derive(Clone)]
 #[contracttype]
+/// Represents the keys used for storing contract data in the storage.
 pub enum DataKey {
     Buyer,
     Seller,
@@ -13,6 +14,7 @@ pub enum DataKey {
 
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
+/// Represents the possible statuses of the escrow contract.
 pub enum Status {
     AwaitingPayment,
     AwaitingDelivery,
