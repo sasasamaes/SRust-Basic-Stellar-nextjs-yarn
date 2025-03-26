@@ -9,10 +9,10 @@ const RELEASED: Symbol = symbol_short!("RELEASED");
 const REFUNDED: Symbol = symbol_short!("REFUNDED");
 
 #[contract]
-pub struct SimpleEscrow;
+pub struct SimpleEscrowContract;
 
 #[contractimpl]
-impl SimpleEscrow {
+impl SimpleEscrowContract {
     pub fn __constructor(
         env: &Env,
         buyer: Address,
