@@ -1,7 +1,7 @@
 #![cfg(test)]
 
-use crate::datatype::DataKey;
-use crate::simple_escrow_contract::{SimpleEscrow, Status};
+use crate::datatype::{DataKey, Status};
+use crate::simple_escrow_contract::SimpleEscrow;
 use soroban_sdk::testutils::Address as _;
 use soroban_sdk::{Address, Env};
 
@@ -47,3 +47,6 @@ fn test_constructor() {
         );
     });
 }
+
+#[test]
+fn test_deposit() {}

@@ -10,3 +10,12 @@ pub enum DataKey {
     Token,
     Status,
 }
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum Status {
+    AwaitingPayment,
+    AwaitingDelivery,
+    Complete,
+    Refunded,
+}
