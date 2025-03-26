@@ -1,6 +1,7 @@
 #![cfg(test)]
 
-use super::*;
+use crate::datatype::DataKey;
+use crate::simple_escrow_contract::{SimpleEscrow, Status};
 use soroban_sdk::testutils::Address as _;
 use soroban_sdk::{Address, Env};
 
