@@ -82,10 +82,6 @@ const ConnectWalletButton = ({ className = "" }) => {
 				<Button disabled className={className}>
 					<Loader2 className="mr-2 h-4 w-4 animate-spin" /> Checking...
 				</Button>
-			) : connecting ? (
-				<Button disabled className={className}>
-					<Loader2 className="mr-2 h-4 w-4 animate-spin" /> Connecting...
-				</Button>
 			) : publicKey ? (
 				<Button
 					variant="outline"
