@@ -1,0 +1,1 @@
+/Users/sasasamaes/Documents/Proyectos2/SRust-Basic-Stellar-nextjs-yarn/packages/soroban/target/debug/libexample_contract.dylib: /Users/sasasamaes/Documents/Proyectos2/SRust-Basic-Stellar-nextjs-yarn/packages/soroban/example-contract/contract.rs

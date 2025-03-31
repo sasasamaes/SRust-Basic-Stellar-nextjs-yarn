@@ -1,0 +1,19 @@
+[package]
+name = "example-contract"
+version = "0.1.0"
+edition = "2021"
+
+
+[lib]
+path = "contract.rs" # Apunta al archivo de contrato
+crate-type = ["cdylib"] # Compilar como librería dinámica para Wasm
+
+[dependencies]
+soroban-sdk = "20.0.0" # Reemplaza con la última versión estable de soroban-sdk
+
+[dev-dependencies]
+soroban-sdk = { version = "20.0.0", features = ["testutils"] } # Para tests
+
+# Configuración específica para Soroban (Opcional pero recomendada)
+[package.metadata.soroban]
+contract = true

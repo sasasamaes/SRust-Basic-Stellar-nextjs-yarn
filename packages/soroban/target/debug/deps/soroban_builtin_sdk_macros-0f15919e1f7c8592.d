@@ -1,0 +1,7 @@
+/Users/sasasamaes/Documents/Proyectos2/SRust-Basic-Stellar-nextjs-yarn/packages/soroban/target/debug/deps/libsoroban_builtin_sdk_macros-0f15919e1f7c8592.dylib: /Users/sasasamaes/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-20.3.0/src/lib.rs /Users/sasasamaes/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-20.3.0/src/derive_fn.rs /Users/sasasamaes/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-20.3.0/src/derive_type.rs
+
+/Users/sasasamaes/Documents/Proyectos2/SRust-Basic-Stellar-nextjs-yarn/packages/soroban/target/debug/deps/soroban_builtin_sdk_macros-0f15919e1f7c8592.d: /Users/sasasamaes/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-20.3.0/src/lib.rs /Users/sasasamaes/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-20.3.0/src/derive_fn.rs /Users/sasasamaes/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-20.3.0/src/derive_type.rs
+
+/Users/sasasamaes/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-20.3.0/src/lib.rs:
+/Users/sasasamaes/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-20.3.0/src/derive_fn.rs:
+/Users/sasasamaes/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-20.3.0/src/derive_type.rs:

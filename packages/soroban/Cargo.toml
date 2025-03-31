@@ -1,0 +1,18 @@
+[workspace]
+resolver = "2" #
+
+members = [
+    "example-contract"
+]
+
+[profile.release]
+opt-level = 'z'
+lto = true
+codegen-units = 1
+panic = 'abort'
+strip = "symbols"
+
+[workspace.dependencies]
+soroban-sdk = "=20.5.0"
+soroban-sdk-macros = "=20.5.0"
+stellar-xdr = "=20.1.0"
